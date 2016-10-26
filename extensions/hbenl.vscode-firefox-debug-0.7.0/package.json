@@ -1,0 +1,340 @@
+{
+	"name": "vscode-firefox-debug",
+	"displayName": "Debugger for Firefox",
+	"version": "0.7.0",
+	"author": "Holger Benl <hbenl@evandor.de>",
+	"publisher": "hbenl",
+	"description": "Debug your web application in Firefox",
+	"icon": "icon.svg",
+	"engines": {
+		"vscode": "^1.1.0"
+	},
+	"categories": [
+		"Debuggers"
+	],
+	"dependencies": {
+		"firefox-profile": "^0.4.2",
+		"fs-extra": "^0.30.0",
+		"jetpack-id": "^1.0.0",
+		"node-uuid": "^1.4.7",
+		"semver": "^5.3.0",
+		"vscode-debugadapter": "^1.11.0",
+		"zip-dir": "^1.0.2"
+	},
+	"devDependencies": {
+		"typescript": "^1.8.10",
+		"typings": "^0.8.1",
+		"vsce": "^1.15.0"
+	},
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/hbenl/vscode-firefox-debug.git"
+	},
+	"keywords": [
+		"vscode",
+		"firefox",
+		"debug"
+	],
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/hbenl/vscode-firefox-debug/issues"
+	},
+	"homepage": "https://github.com/hbenl/vscode-firefox-debug",
+	"contributes": {
+		"debuggers": [
+			{
+				"type": "firefox",
+				"label": "Firefox",
+				"program": "./out/firefoxDebugSession.js",
+				"runtime": "node",
+				"initialConfigurations": [
+					{
+						"name": "Launch index.html",
+						"type": "firefox",
+						"request": "launch",
+						"file": "${workspaceRoot}/index.html"
+					},
+					{
+						"name": "Launch localhost",
+						"type": "firefox",
+						"request": "launch",
+						"url": "http://localhost/index.html",
+						"webRoot": "${workspaceRoot}"
+					},
+					{
+						"name": "Attach",
+						"type": "firefox",
+						"request": "attach"
+					},
+					{
+						"name": "Launch addon",
+						"type": "firefox",
+						"request": "launch",
+						"addonType": "addonSdk",
+						"addonPath": "${workspaceRoot}"
+					}
+				],
+				"configurationAttributes": {
+					"launch": {
+						"required": [],
+						"properties": {
+							"file": {
+								"type": "string",
+								"description": "The file to open in the browser",
+								"default": "${workspaceRoot}/index.html"
+							},
+							"url": {
+								"type": "string",
+								"description": "The url to open in the browser"
+							},
+							"webRoot": {
+								"type": "string",
+								"description": "If the 'url' property is specified, this property specifies the workspace absolute path corresponding to the path of the url",
+								"default": "${workspaceRoot}"
+							},
+							"firefoxExecutable": {
+								"type": "string",
+								"description": "Absolute path to the Firefox executable"
+							},
+							"profileDir": {
+								"type": "string",
+								"description": "The path of the Firefox profile directory to use"
+							},
+							"profile": {
+								"type": "string",
+								"description": "The name of the Firefox profile to use"
+							},
+							"port": {
+								"type": "number",
+								"description": "The remote debugging port to use",
+								"default": 6000
+							},
+							"firefoxArgs": {
+								"type": "array",
+								"description": "Additional arguments passed to Firefox",
+								"items": {
+									"type": "string"
+								},
+								"default": []
+							},
+							"addonType": {
+								"type": "string",
+								"enum": [
+									"legacy",
+									"addonSdk",
+									"webExtension"
+								],
+								"description": "The type of this Firefox addon (legacy, addonSdk or webExtension)",
+								"default": "addonSdk"
+							},
+							"addonPath": {
+								"type": "string",
+								"description": "The path of the directory containing the addon",
+								"default": "${workspaceRoot}"
+							},
+							"log": {
+								"type": "object",
+								"description": "Configuration for diagnostic logging of the debug adapter",
+								"properties": {
+									"fileName": {
+										"type": "string",
+										"description": "The name of the logfile",
+										"default": "${workspaceRoot}/vscode-firefox-debug.log"
+									},
+									"fileLevel": {
+										"type": "object",
+										"description": "The minimum loglevel(s) for messages written to the logfile",
+										"properties": {
+											"default": {
+												"type": "string",
+												"enum": [
+													"Debug",
+													"Info",
+													"Warn",
+													"Error"
+												],
+												"description": "The default loglevel"
+											}
+										},
+										"additionalProperties": {
+											"type": "string",
+											"enum": [
+												"Debug",
+												"Info",
+												"Warn",
+												"Error"
+											]
+										},
+										"default": {
+											"default": "Debug"
+										}
+									},
+									"consoleLevel": {
+										"type": "object",
+										"description": "The minimum loglevel(s) for messages written to the console",
+										"properties": {
+											"default": {
+												"type": "string",
+												"enum": [
+													"Debug",
+													"Info",
+													"Warn",
+													"Error"
+												],
+												"description": "The default loglevel"
+											}
+										},
+										"additionalProperties": {
+											"type": "string",
+											"enum": [
+												"Debug",
+												"Info",
+												"Warn",
+												"Error"
+											]
+										},
+										"default": {
+											"default": "Debug"
+										}
+									}
+								},
+								"default": {
+									"fileName": "${workspaceRoot}/vscode-firefox-debug.log",
+									"fileLevel": {
+										"default": "Debug"
+									},
+									"consoleLevel": {
+										"default": "Warn"
+									}
+								}
+							}
+						}
+					},
+					"attach": {
+						"required": [],
+						"properties": {
+							"url": {
+								"type": "string",
+								"description": "The url to open in the browser"
+							},
+							"webRoot": {
+								"type": "string",
+								"description": "If the 'url' property is specified, this property specifies the workspace absolute path corresponding to the path of the url",
+								"default": "${workspaceRoot}"
+							},
+							"port": {
+								"type": "number",
+								"description": "The remote debugging port to use",
+								"default": 6000
+							},
+							"host": {
+								"type": "string",
+								"description": "The remote debugging host to use",
+								"default": "localhost"
+							},
+							"addonType": {
+								"type": "string",
+								"enum": [
+									"legacy",
+									"addonSdk",
+									"webExtension"
+								],
+								"description": "The type of this Firefox addon (legacy, addonSdk or webExtension)",
+								"default": "addonSdk"
+							},
+							"addonPath": {
+								"type": "string",
+								"description": "The path of the directory containing the addon",
+								"default": "${workspaceRoot}"
+							},
+							"log": {
+								"type": "object",
+								"description": "Configuration for diagnostic logging of the debug adapter",
+								"properties": {
+									"fileName": {
+										"type": "string",
+										"description": "The name of the logfile",
+										"default": "${workspaceRoot}/vscode-firefox-debug.log"
+									},
+									"fileLevel": {
+										"type": "object",
+										"description": "The minimum loglevel(s) for messages written to the logfile",
+										"properties": {
+											"default": {
+												"type": "string",
+												"enum": [
+													"Debug",
+													"Info",
+													"Warn",
+													"Error"
+												],
+												"description": "The default loglevel"
+											}
+										},
+										"additionalProperties": {
+											"type": "string",
+											"enum": [
+												"Debug",
+												"Info",
+												"Warn",
+												"Error"
+											]
+										},
+										"default": {
+											"default": "Debug"
+										}
+									},
+									"consoleLevel": {
+										"type": "object",
+										"description": "The minimum loglevel(s) for messages written to the console",
+										"properties": {
+											"default": {
+												"type": "string",
+												"enum": [
+													"Debug",
+													"Info",
+													"Warn",
+													"Error"
+												],
+												"description": "The default loglevel"
+											}
+										},
+										"additionalProperties": {
+											"type": "string",
+											"enum": [
+												"Debug",
+												"Info",
+												"Warn",
+												"Error"
+											]
+										},
+										"default": {
+											"default": "Debug"
+										}
+									}
+								},
+								"default": {
+									"fileName": "${workspaceRoot}/vscode-firefox-debug.log",
+									"fileLevel": {
+										"default": "Debug"
+									},
+									"consoleLevel": {
+										"default": "Warn"
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		]
+	},
+	"__metadata": {
+		"id": "c5f4d87f-a524-462c-ac01-923eb19cf3e9",
+		"publisherId": "3356f11a-6798-4f03-a93f-3d929b7fca7c",
+		"publisherDisplayName": "Holger Benl"
+	}
+}

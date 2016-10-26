@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
+  <Metadata>
+    <Identity Language="en-US" Id="vscode-color" Version="0.2.0" Publisher="anseki"/>
+    <DisplayName>Color Picker</DisplayName>
+    <Description xml:space="preserve">Helper with GUI to generate color codes such as CSS color notations.</Description>
+    <Tags>color,picker,convert,hsb,hsv,hsl,hwb,rgb,hex,css,cmyk,palette,style,gui,dialog,vscode</Tags>
+    <Categories>Other</Categories>
+    <GalleryFlags>Public</GalleryFlags>
+    <Properties>
+      
+        <Property Id="Microsoft.VisualStudio.Services.Links.Source" Value="git://github.com/anseki/vscode-color.git" />
+        <Property Id="Microsoft.VisualStudio.Services.Links.Getstarted" Value="git://github.com/anseki/vscode-color.git" />
+        <Property Id="Microsoft.VisualStudio.Services.Links.Repository" Value="git://github.com/anseki/vscode-color.git" />
+      
+      <Property Id="Microsoft.VisualStudio.Services.Links.Support" Value="https://github.com/anseki/vscode-color/issues" />
+      <Property Id="Microsoft.VisualStudio.Services.Links.Learn" Value="https://github.com/anseki/vscode-color" />
+      
+      
+    </Properties>
+    
+    <Icon>extension/icon.png</Icon>
+  </Metadata>
+  <Installation>
+    <InstallationTarget Id="Microsoft.VisualStudio.Code"/>
+  </Installation>
+  <Dependencies/>
+  <Assets>
+    <Asset Type="Microsoft.VisualStudio.Code.Manifest" Path="extension/package.json" Addressable="true" />
+    <Asset Type="Microsoft.VisualStudio.Services.Content.Details" Path="extension/README.md" Addressable="true" /><Asset Type="Microsoft.VisualStudio.Services.Icons.Default" Path="extension/icon.png" Addressable="true" />
+  </Assets>
+</PackageManifest>

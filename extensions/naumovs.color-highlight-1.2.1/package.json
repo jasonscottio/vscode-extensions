@@ -1,0 +1,87 @@
+{
+	"name": "color-highlight",
+	"displayName": "Color Highlight",
+	"description": "Highlight web colors in your editor",
+	"version": "1.2.1",
+	"publisher": "naumovs",
+	"engines": {
+		"vscode": "^0.10.1"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"*"
+	],
+	"scripts": {
+		"vscode:prepublish": "node ./node_modules/webpack/bin/webpack.js",
+		"compile": "node ./node_modules/webpack/bin/webpack.js -w"
+	},
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/naumovs/vscode-ext-color-highlight/issues"
+	},
+	"homepage": "https://github.com/naumovs/vscode-ext-color-highlight",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/naumovs/vscode-ext-color-highlight.git"
+	},
+	"main": "./dist/extension",
+	"icon": "images/preview.png",
+	"contributes": {
+		"configuration": {
+			"title": "Color Highlight extension (reboot after any changes required)",
+			"properties": {
+				"color-highlight.enable": {
+					"default": true,
+					"title": "Global enable switch for user/workspace settings",
+					"type": "boolean"
+				},
+				"color-highlight.languages": {
+					"default": [
+						"javascript",
+						"scss",
+						"css",
+						"sass",
+						"less",
+						"php",
+						"xml",
+						"html",
+						"json"
+					],
+					"title": "Autohighlight files with these languages",
+					"type": "array"
+				},
+				"color-highlight.matchWords": {
+					"default": true,
+					"title": "Highlight color words in files (grey, green, etc.)",
+					"type": "boolean"
+				},
+				"color-highlight.markerType": {
+					"default": "background",
+					"title": "Highlight style, valid types: 'background', 'outline', 'underline'",
+					"description": "Style of the highlight. Can be 'background', 'outline', 'underline'",
+					"type": "string"
+				}
+			}
+		},
+		"commands": [
+			{
+				"command": "extension.colorHighlight",
+				"title": "Color Highlight"
+			}
+		]
+	},
+	"devDependencies": {
+		"color": "^0.11.1",
+		"color-name": "^1.1.1",
+		"json-loader": "^0.5.4",
+		"vscode": "0.11.x",
+		"webpack": "^1.13.1"
+	},
+	"__metadata": {
+		"id": "121396ad-85a1-45ec-9fd1-d95028a847f5",
+		"publisherId": "e9a76d04-24d4-44eb-a202-964f71acf59e",
+		"publisherDisplayName": "Sergii Naumov"
+	}
+}

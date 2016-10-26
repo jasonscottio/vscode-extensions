@@ -1,0 +1,37 @@
+{
+	"name": "theme-dracula",
+	"displayName": "Dracula Syntax Theme",
+	"description": "Dracula Syntax Theme. A dark theme for many editors, shells, and more.",
+	"version": "1.2.5",
+	"engines": {
+		"vscode": "*"
+	},
+	"publisher": "dracula-theme",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/dracula/visual-studio-code/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/dracula/visual-studio-code.git"
+	},
+	"categories": [
+		"Themes"
+	],
+	"icon": "icon.png",
+	"homepage": "https://draculatheme.com/",
+	"contributes": {
+		"themes": [
+			{
+				"label": "Dracula Syntax Theme",
+				"uiTheme": "vs-dark",
+				"path": "./themes/Dracula.tmTheme"
+			}
+		]
+	},
+	"__metadata": {
+		"id": "4e44877c-1c8d-4f9c-ba86-1372d0fbeeb1",
+		"publisherId": "fbb3d024-f8f2-460c-bdb5-99552f6d8c4b",
+		"publisherDisplayName": "Dracula Theme"
+	}
+}

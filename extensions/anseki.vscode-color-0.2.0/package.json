@@ -1,0 +1,119 @@
+{
+	"name": "vscode-color",
+	"version": "0.2.0",
+	"displayName": "Color Picker",
+	"description": "Helper with GUI to generate color codes such as CSS color notations.",
+	"keywords": [
+		"color",
+		"picker",
+		"convert",
+		"hsb",
+		"hsv",
+		"hsl",
+		"hwb",
+		"rgb",
+		"hex",
+		"css",
+		"cmyk",
+		"palette",
+		"style",
+		"gui",
+		"dialog"
+	],
+	"categories": [
+		"Other"
+	],
+	"icon": "icon.png",
+	"main": "./extension",
+	"extensionMain": "./lib/color-helper",
+	"engines": {
+		"vscode": "^0.10.1"
+	},
+	"dependencies": {
+		"comma-separated-values": "^3.6.4",
+		"electron-prebuilt": "0.37.3",
+		"js-yaml": "^3.5.5",
+		"process-bridge": "^0.3.5"
+	},
+	"devDependencies": {
+		"asar": "^0.11.0",
+		"clean-css": "^3.4.9",
+		"grunt": "^0.4.5",
+		"grunt-contrib-clean": "^1.0.0",
+		"grunt-contrib-copy": "^0.8.2",
+		"grunt-task-helper": "^0.3.7",
+		"htmlclean": "^2.7.7",
+		"jquery": "^2.2.2",
+		"stats-filelist": "^0.1.1",
+		"vscode": "0.10.x"
+	},
+	"contributes": {
+		"commands": [
+			{
+				"command": "extension.colorHelper.pick",
+				"title": "Pick Color"
+			},
+			{
+				"command": "extension.colorHelper.convert",
+				"title": "Convert Color"
+			}
+		],
+		"keybindings": [
+			{
+				"command": "extension.colorHelper.pick",
+				"key": "alt+c p",
+				"when": "editorTextFocus"
+			},
+			{
+				"command": "extension.colorHelper.convert",
+				"key": "alt+c c",
+				"when": "editorTextFocus"
+			}
+		],
+		"configuration": {
+			"type": "object",
+			"title": "Color Picker configuration",
+			"properties": {
+				"colorHelper.pickerForm": {
+					"type": "string",
+					"default": "default",
+					"description": "Name of preset package that switches UI and features. Allowed values are \"default\", \"largePalette\", \"simple\", \"compact\", \"compact2\" or \"byPalette\"."
+				},
+				"colorHelper.storeDir": {
+					"type": "string",
+					"default": "",
+					"description": "Path to directory that contains your color palettes."
+				},
+				"colorHelper.resident": {
+					"type": "boolean",
+					"default": false,
+					"description": "Stands by for a quick response. It stays in memory even after it is closed until it is unloaded."
+				},
+				"colorHelper.formatsOrder": {
+					"type": "array",
+					"default": [],
+					"description": "Order of formats in each UI. Allowed items are \"hsb\", \"hsl\", \"hwb\", \"rgb\", \"hex\", \"named\", \"cmyk\" or \"gray\". Items that are not contained in this array are moved to the top of the list when it was used. If you want to make the list static, specify all formats like `[\"hsb\", \"hsl\", \"hwb\", \"rgb\", \"hex\", \"named\", \"cmyk\", \"gray\"]`."
+				}
+			}
+		}
+	},
+	"activationEvents": [
+		"onCommand:extension.colorHelper.pick",
+		"onCommand:extension.colorHelper.convert"
+	],
+	"homepage": "https://github.com/anseki/vscode-color",
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/anseki/vscode-color.git"
+	},
+	"bugs": {
+		"url": "https://github.com/anseki/vscode-color/issues"
+	},
+	"license": "MIT",
+	"publisher": "anseki",
+	"__metadata": {
+		"id": "37d7747f-e652-4eac-83de-f2939f7e2121",
+		"publisherId": "438bb7a7-6997-47eb-b23b-72c3ba845702",
+		"publisherDisplayName": "anseki"
+	}
+}
